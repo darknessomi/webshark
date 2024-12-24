@@ -7,8 +7,8 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir -p /out /usr/src /var/run
 WORKDIR /usr/src
 
-RUN git clone --depth=1 https://github.com/qxip/node-webshark.git /usr/src/node-webshark
-RUN git clone --depth=1 https://gitlab.com/wireshark/wireshark.git /usr/src/wireshark
+RUN git clone --depth=1 https://github.com/darknessomi/webshark.git /usr/src/node-webshark
+RUN git clone -b wireshark-4.2.9 --depth=1 https://gitlab.com/wireshark/wireshark.git /usr/src/wireshark
 
 WORKDIR /usr/src/wireshark
 RUN ../node-webshark/sharkd/build.sh
@@ -16,7 +16,7 @@ RUN ../node-webshark/sharkd/build.sh
 WORKDIR /usr/src
 RUN mkdir web \
  && cd web \
- && wget github.com/qxip/webshark-ui/releases/latest/download/latest.zip \
+ && wget github.com/darknessomi/webshark-ui/releases/latest/download/latest.zip \
  && unzip latest.zip \
  && rm -rf latest.zip \
  && sed -i 's|href="/"|href="/webshark/"|g' index.html
